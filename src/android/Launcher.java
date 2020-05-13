@@ -223,7 +223,7 @@ public class Launcher extends CordovaPlugin {
 	
 		final CordovaInterface mycordova = cordova;
 		final CordovaPlugin plugin = this;
-		plugin.webView.loadUrl("javascript:console.log('options: ', options);");
+	
 		Log.i(TAG, "Trying to launch app: " + "com.virgo.sop");
 		cordova.getThreadPool().execute(new LauncherRunnable(this.callback) {
 			public void run() {
