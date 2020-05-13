@@ -221,13 +221,14 @@ public class Launcher extends CordovaPlugin {
 		Bundle extras = new Bundle();
 		for (int i = 0, size = extrasObj.length(); i < size; i++) {
 			JSONObject extra = extrasObj.getJSONObject(i);
-			if (extra.has("name") && extra.has("value") && extra.has("dataType")) {
+			if (extra.has("name") && extra.has("value") && extra.has("dataType")&& extra.has("data")) {
 				String extraName = extra.getString("name");
+				String extraData = extra.getString("data");
 				String dataType = extra.getString("dataType");
 				try {
 					if (dataType.equalsIgnoreCase("Byte")) {
 						try {
-							extras.putByte(extraName, ((byte) extra.getInt("value")));
+							extras.putByte(extraName,extraData, ((byte) extra.getInt("value")));
 						} catch (Exception e) {
 							Log.e(TAG, "Error converting to byte for extra: " + extraName);
 							e.printStackTrace();
@@ -235,7 +236,7 @@ public class Launcher extends CordovaPlugin {
 						}
 					} else if (dataType.equalsIgnoreCase("ByteArray")) {
 						try {
-							extras.putByteArray(extraName, ParseTypes.toByteArray(extra.getJSONArray("value")));
+							extras.putByteArray(extraName,extraData, ParseTypes.toByteArray(extra.getJSONArray("value")));
 						} catch (Exception e) {
 							Log.e(TAG, "Error converting to byte for extra: " + extraName);
 							e.printStackTrace();
@@ -243,27 +244,27 @@ public class Launcher extends CordovaPlugin {
 						}
 					} else if (dataType.equalsIgnoreCase("Short")) {
 						try {
-							extras.putShort(extraName, ((short) extra.getInt("value")));
+							extras.putShort(extraName,extraData, ((short) extra.getInt("value")));
 						} catch (Exception e) {
 							Log.e(TAG, "Error converting to short for extra: " + extraName);
 							e.printStackTrace();
 							throw e;
 						}
 					} else if (dataType.equalsIgnoreCase("ShortArray")) {
-						extras.putShortArray(extraName, ParseTypes.toShortArray(extra.getJSONArray("value")));
+						extras.putShortArray(extraName,extraData, ParseTypes.toShortArray(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("Int")) {
 						extras.putInt(extraName, extra.getInt("value"));
 					} else if (dataType.equalsIgnoreCase("IntArray")) {
-						extras.putIntArray(extraName, ParseTypes.toIntArray(extra.getJSONArray("value")));
+						extras.putIntArray(extraName,extraData, ParseTypes.toIntArray(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("IntArrayList")) {
-						extras.putIntegerArrayList(extraName, ParseTypes.toIntegerArrayList(extra.getJSONArray("value")));
+						extras.putIntegerArrayList(extraName,extraData, ParseTypes.toIntegerArrayList(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("Long")) {
-						extras.putLong(extraName, extra.getLong("value"));
+						extras.putLong(extraName,extraData, extra.getLong("value"));
 					} else if (dataType.equalsIgnoreCase("LongArray")) {
-						extras.putLongArray(extraName, ParseTypes.toLongArray(extra.getJSONArray("value")));
+						extras.putLongArray(extraName,extraData, ParseTypes.toLongArray(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("Float")) {
 						try {
-							extras.putFloat(extraName, Float.parseFloat(extra.getString("value")));
+							extras.putFloat(extraName,extraData, Float.parseFloat(extra.getString("value")));
 						} catch (Exception e) {
 							Log.e(TAG, "Error parsing float for extra: " + extraName);
 							e.printStackTrace();
@@ -271,36 +272,36 @@ public class Launcher extends CordovaPlugin {
 						}
 					} else if (dataType.equalsIgnoreCase("FloatArray")) {
 						try {
-							extras.putFloatArray(extraName, ParseTypes.toFloatArray(extra.getJSONArray("value")));
+							extras.putFloatArray(extraName,extraData, ParseTypes.toFloatArray(extra.getJSONArray("value")));
 						} catch (Exception e) {
 							Log.e(TAG, "Error parsing float for extra: " + extraName);
 							e.printStackTrace();
 							throw e;
 						}
 					} else if (dataType.equalsIgnoreCase("Double")) {
-						extras.putDouble(extraName, extra.getDouble("value"));
+						extras.putDouble(extraName,extraData, extra.getDouble("value"));
 					} else if (dataType.equalsIgnoreCase("DoubleArray")) {
-						extras.putDoubleArray(extraName, ParseTypes.toDoubleArray(extra.getJSONArray("value")));
+						extras.putDoubleArray(extraName,extraData, ParseTypes.toDoubleArray(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("Boolean")) {
-						extras.putBoolean(extraName, extra.getBoolean("value"));
+						extras.putBoolean(extraName,extraData, extra.getBoolean("value"));
 					} else if (dataType.equalsIgnoreCase("BooleanArray")) {
-						extras.putBooleanArray(extraName, ParseTypes.toBooleanArray(extra.getJSONArray("value")));
+						extras.putBooleanArray(extraName,extraData, ParseTypes.toBooleanArray(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("String")) {
 						extras.putString(extraName, extra.getString("value"));
 					} else if (dataType.equalsIgnoreCase("StringArray")) {
-						extras.putStringArray(extraName, ParseTypes.toStringArray(extra.getJSONArray("value")));
+						extras.putStringArray(extraName,extraData, ParseTypes.toStringArray(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("StringArrayList")) {
-						extras.putStringArrayList(extraName, ParseTypes.toStringArrayList(extra.getJSONArray("value")));
+						extras.putStringArrayList(extraName,extraData, ParseTypes.toStringArrayList(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("Char")) {
-						extras.putChar(extraName, ParseTypes.toChar(extra.getString("value")));
+						extras.putChar(extraName,extraData, ParseTypes.toChar(extra.getString("value")));
 					} else if (dataType.equalsIgnoreCase("CharArray")) {
-						extras.putCharArray(extraName, ParseTypes.toCharArray(extra.getString("value")));
+						extras.putCharArray(extraName,extraData, ParseTypes.toCharArray(extra.getString("value")));
 					} else if (dataType.equalsIgnoreCase("CharSequence")) {
-						extras.putCharSequence(extraName, extra.getString("value"));
+						extras.putCharSequence(extraName,extraData, extra.getString("value"));
 					} else if (dataType.equalsIgnoreCase("CharSequenceArray")) {
-						extras.putCharSequenceArray(extraName, ParseTypes.toCharSequenceArray(extra.getJSONArray("value")));
+						extras.putCharSequenceArray(extraName,extraData, ParseTypes.toCharSequenceArray(extra.getJSONArray("value")));
 					} else if (dataType.equalsIgnoreCase("CharSequenceArrayList")) {
-						extras.putCharSequenceArrayList(extraName, ParseTypes.toCharSequenceArrayList(extra.getJSONArray("value")));
+						extras.putCharSequenceArrayList(extraName,extraData, ParseTypes.toCharSequenceArrayList(extra.getJSONArray("value")));
 					/*
 					} else if (dataType.equalsIgnoreCase("Size") && Build.VERSION.SDK_INT >= 21) {
 						extras.putSize(extraName, extra.getJSONObject("value"));
@@ -315,13 +316,13 @@ public class Launcher extends CordovaPlugin {
 							String paType = extra.getString("paType").toUpperCase();
 							if (ParseTypes.SUPPORTED_PA_TYPES.contains(paType)) {
 								if (dataType.equalsIgnoreCase("Parcelable")) {
-									extras.putParcelable(extraName, ParseTypes.toParcelable(extra.getString("value"), paType));
+									extras.putParcelable(extraName,extraData, ParseTypes.toParcelable(extra.getString("value"), paType));
 								} else if (dataType.equalsIgnoreCase("ParcelableArray")) {
-									extras.putParcelableArray(extraName, ParseTypes.toParcelableArray(extra.getJSONArray("value"), paType));
+									extras.putParcelableArray(extraName,extraData, ParseTypes.toParcelableArray(extra.getJSONArray("value"), paType));
 								} else if (dataType.equalsIgnoreCase("ParcelableArrayList")) {
-									extras.putParcelableArrayList(extraName, ParseTypes.toParcelableArrayList(extra.getJSONArray("value"), paType));
+									extras.putParcelableArrayList(extraName,extraData, ParseTypes.toParcelableArrayList(extra.getJSONArray("value"), paType));
 								} else if (dataType.equalsIgnoreCase("SparseParcelableArray")) {
-									extras.putSparseParcelableArray(extraName, ParseTypes.toSparseParcelableArray(extra.getJSONObject("value"), paType));
+									extras.putSparseParcelableArray(extraName,extraData, ParseTypes.toSparseParcelableArray(extra.getJSONObject("value"), paType));
 								}
 							} else {
 								Log.e(TAG, "ParcelableArray type '" + paType + "' is not currently supported.");
