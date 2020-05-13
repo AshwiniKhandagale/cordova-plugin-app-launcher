@@ -229,6 +229,7 @@ public class Launcher extends CordovaPlugin {
 						launchIntent.putExtra("data","07dattatray@gmail.com");
 						mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
 						((Launcher) plugin).callbackLaunched();
+						return true;
 					} catch (ActivityNotFoundException e) {
 						Log.e(TAG, "Error: Activity for package com.virgo.sop was not found.");
 						e.printStackTrace();
@@ -242,6 +243,7 @@ public class Launcher extends CordovaPlugin {
 		// Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.virgo.sop");
 		//  launchIntent.putExtra("data","07dattatray@gmail.com"); 
 		//  startActivity(launchIntent);
+        return false;
 	}
 
 	private Bundle createExtras(JSONArray extrasObj) throws JSONException {
