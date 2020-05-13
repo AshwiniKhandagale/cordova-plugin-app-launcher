@@ -215,7 +215,7 @@ public class Launcher extends CordovaPlugin {
 		// 	return true;
 		// }
 		// return false;
-		String string = options.getString("packageName")
+		String string = options.getString("packageName");
         String[] parts = string.split("-");
         String part1 = parts[0]; 
         String part2 = parts[1]; 
