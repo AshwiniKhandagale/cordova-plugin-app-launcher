@@ -215,9 +215,33 @@ public class Launcher extends CordovaPlugin {
 		// 	return true;
 		// }
 		// return false;
-		Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.virgo.sop");
-		 launchIntent.putExtra("data","07dattatray@gmail.com"); 
-		 startActivity(launchIntent);
+		final CordovaInterface mycordova = cordova;
+		final CordovaPlugin plugin = this;
+		Log.i(TAG, "Trying to launch app: " + "com.virgo.sop");
+		cordova.getThreadPool().execute(new LauncherRunnable(this.callback) {
+			public void run() {
+				final PackageManager pm = plugin.webView.getContext().getPackageManager();
+				final Intent launchIntent = pm.getLaunchIntentForPackage("com.virgo.sop");
+				boolean appNotFound = launchIntent == null;
+
+				if (!appNotFound) {
+					try {
+						launchIntent.putExtra("data","07dattatray@gmail.com");
+						mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
+						((Launcher) plugin).callbackLaunched();
+					} catch (ActivityNotFoundException e) {
+						Log.e(TAG, "Error: Activity for package" + packageName + " was not found.");
+						e.printStackTrace();
+						callbackContext.error("Activity not found for package name.");
+					}
+				} else {
+					callbackContext.error("Activity not found for package name.");
+				}
+			}
+		});
+		// Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.virgo.sop");
+		//  launchIntent.putExtra("data","07dattatray@gmail.com"); 
+		//  startActivity(launchIntent);
 	}
 
 	private Bundle createExtras(JSONArray extrasObj) throws JSONException {
