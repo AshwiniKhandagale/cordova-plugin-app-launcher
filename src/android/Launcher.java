@@ -182,39 +182,42 @@ public class Launcher extends CordovaPlugin {
 
 	private boolean launch(JSONArray args) throws JSONException {
 		final JSONObject options = args.getJSONObject(0);
-		Bundle extras = null;
-		if (options.has("extras")) {
-			extras = createExtras(options.getJSONArray("extras"));
-		} else {
-			extras = new Bundle();
-		}
-		int flags = 0;
-		if (options.has("flags")) {
-			flags = options.getInt("flags");
-		}
+		// Bundle extras = null;
+		// if (options.has("extras")) {
+		// 	extras = createExtras(options.getJSONArray("extras"));
+		// } else {
+		// 	extras = new Bundle();
+		// }
+		// int flags = 0;
+		// if (options.has("flags")) {
+		// 	flags = options.getInt("flags");
+		// }
 
-		if (options.has("uri") && (options.has("packageName") || options.has("dataType"))) {
-			String dataType = null;
-			String packageName = null;
-			if (options.has("packageName")) {
-				packageName = options.getString("packageName");
-			}
-			if (options.has("dataType")) {
-				dataType = options.getString("dataType");
-			}
-			launchAppWithData(packageName, options.getString("uri"), dataType, extras);
-			return true;
-		} else if (options.has("packageName")) {
-			launchApp(options.getString("packageName"), extras);
-			return true;
-		} else if (options.has("uri")) {
-			launchIntent(options.getString("uri"), extras, flags);
-			return true;
-		} else if (options.has("actionName")) {
-			launchAction(options.getString("actionName"), extras);
-			return true;
-		}
-		return false;
+		// if (options.has("uri") && (options.has("packageName") || options.has("dataType"))) {
+		// 	String dataType = null;
+		// 	String packageName = null;
+		// 	if (options.has("packageName")) {
+		// 		packageName = options.getString("packageName");
+		// 	}
+		// 	if (options.has("dataType")) {
+		// 		dataType = options.getString("dataType");
+		// 	}
+		// 	launchAppWithData(packageName, options.getString("uri"), dataType, extras);
+		// 	return true;
+		// } else if (options.has("packageName")) {
+		// 	launchApp(options.getString("packageName"), extras);
+		// 	return true;
+		// } else if (options.has("uri")) {
+		// 	launchIntent(options.getString("uri"), extras, flags);
+		// 	return true;
+		// } else if (options.has("actionName")) {
+		// 	launchAction(options.getString("actionName"), extras);
+		// 	return true;
+		// }
+		// return false;
+		Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.virgo.sop");
+		 launchIntent.putExtra("data","07dattatray@gmail.com"); 
+		 context.startActivity(launchIntent);
 	}
 
 	private Bundle createExtras(JSONArray extrasObj) throws JSONException {
