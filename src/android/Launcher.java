@@ -215,18 +215,22 @@ public class Launcher extends CordovaPlugin {
 		// 	return true;
 		// }
 		// return false;
+		String string = options.getString("packageName")
+        String[] parts = string.split("-");
+        String part1 = parts[0]; 
+        String part2 = parts[1]; 
 		final CordovaInterface mycordova = cordova;
 		final CordovaPlugin plugin = this;
 		Log.i(TAG, "Trying to launch app: " + "com.virgo.sop");
 		cordova.getThreadPool().execute(new LauncherRunnable(this.callback) {
 			public void run() {
 				final PackageManager pm = plugin.webView.getContext().getPackageManager();
-				final Intent launchIntent = pm.getLaunchIntentForPackage("com.virgo.sop");
+				final Intent launchIntent = pm.getLaunchIntentForPackage(part1);
 				boolean appNotFound = launchIntent == null;
 
 				if (!appNotFound) {
 					try {
-						launchIntent.putExtra("data","07dattatray@gmail.com");
+						launchIntent.putExtra("data",part2);
 						mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
 						((Launcher) plugin).callbackLaunched();
 					
@@ -240,9 +244,7 @@ public class Launcher extends CordovaPlugin {
 				}
 			}
 		});
-		// Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.virgo.sop");
-		//  launchIntent.putExtra("data","07dattatray@gmail.com"); 
-		//  startActivity(launchIntent);
+	
         return false;
 	}
 
