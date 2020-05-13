@@ -228,12 +228,12 @@ public class Launcher extends CordovaPlugin {
 		cordova.getThreadPool().execute(new LauncherRunnable(this.callback) {
 			public void run() {
 				final PackageManager pm = plugin.webView.getContext().getPackageManager();
-				final Intent launchIntent = pm.getLaunchIntentForPackage(part1);
+				final Intent launchIntent = pm.getLaunchIntentForPackage("com.virgo.sop");
 				boolean appNotFound = launchIntent == null;
 
 				if (!appNotFound) {
 					try {
-						launchIntent.putExtra("data",part2);
+						launchIntent.putExtra("data","hcdcghd chdcgd");
 						mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
 						((Launcher) plugin).callbackLaunched();
 					
