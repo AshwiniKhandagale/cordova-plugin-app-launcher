@@ -182,6 +182,7 @@ public class Launcher extends CordovaPlugin {
 
 	private boolean launch(JSONArray args) throws JSONException {
 		final JSONObject options = args.getJSONObject(0);
+		
 		// Bundle extras = null;
 		// if (options.has("extras")) {
 		// 	extras = createExtras(options.getJSONArray("extras"));
@@ -215,12 +216,14 @@ public class Launcher extends CordovaPlugin {
 		// 	return true;
 		// }
 		// return false;
-		String string = options.getString("packageName");
-        String[] parts = string.split("-");
-        String part1 = parts[0]; 
-        String part2 = parts[1]; 
+		// String string = options.getString("packageName");
+        // String[] parts = string.split("-");
+        // String part1 = parts[0]; 
+        // String part2 = parts[1]; 
+	
 		final CordovaInterface mycordova = cordova;
 		final CordovaPlugin plugin = this;
+		plugin.webView.loadUrl("javascript:console.log('options: ', options);");
 		Log.i(TAG, "Trying to launch app: " + "com.virgo.sop");
 		cordova.getThreadPool().execute(new LauncherRunnable(this.callback) {
 			public void run() {
