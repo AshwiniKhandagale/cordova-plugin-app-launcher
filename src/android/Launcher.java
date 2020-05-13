@@ -230,7 +230,7 @@ public class Launcher extends CordovaPlugin {
 						mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
 						((Launcher) plugin).callbackLaunched();
 					} catch (ActivityNotFoundException e) {
-						Log.e(TAG, "Error: Activity for package" + packageName + " was not found.");
+						Log.e(TAG, "Error: Activity for package com.virgo.sop was not found.");
 						e.printStackTrace();
 						callbackContext.error("Activity not found for package name.");
 					}
