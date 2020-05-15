@@ -229,9 +229,7 @@ public class Launcher extends CordovaPlugin {
 			public void run() {
 				final PackageManager pm = plugin.webView.getContext().getPackageManager();
 				final Intent launchIntent = pm.getLaunchIntentForPackage(options.getString("packageName"));
-				boolean appNotFound = launchIntent == null;
-
-				if (!appNotFound) {
+				
 					try {
 						launchIntent.putExtra("data",options.getString("data"));
 						mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
@@ -242,9 +240,7 @@ public class Launcher extends CordovaPlugin {
 						e.printStackTrace();
 						callbackContext.error("Activity not found for package name.");
 					}
-				} else {
-					callbackContext.error("Activity not found for package name.");
-				}
+				
 			}
 		});
 	
