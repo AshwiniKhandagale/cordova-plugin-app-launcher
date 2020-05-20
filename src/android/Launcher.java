@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.ComponentName;
 import android.net.Uri;
 import android.util.Log;
 import android.content.pm.ActivityInfo;
