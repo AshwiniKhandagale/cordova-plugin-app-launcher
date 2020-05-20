@@ -232,9 +232,10 @@ public class Launcher extends CordovaPlugin {
 				// final Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
 				
                 final Intent intent = new Intent();
-                intent.setComponent(newComponentName(packageName,"com.virgo.sop.Sop"));
+                intent.setComponent(new ComponentName(packageName,"com.virgo.sop.Sop"));
                 intent.putExtra("data",data);
-                mycordova.startActivity(intent);
+				mycordova.startActivityForResult(plugin, intent, LAUNCH_REQUEST);
+                //mycordova.startActivity(intent);
 					try {
 						// launchIntent.putExtra("data",data);
 						// mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
