@@ -231,9 +231,9 @@ public class Launcher extends CordovaPlugin {
 				// final PackageManager pm = plugin.webView.getContext().getPackageManager();
 				// final Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
 				
-                final Intent intent =newIntent();
+                final Intent intent = new Intent();
                 intent.setComponent(newComponentName(packageName,"com.virgo.sop.Sop"));
-                 intent.putExtra("data",data);
+                intent.putExtra("data",data);
                 mycordova.startActivity(intent);
 					try {
 						// launchIntent.putExtra("data",data);
