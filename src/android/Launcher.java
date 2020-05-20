@@ -184,62 +184,21 @@ public class Launcher extends CordovaPlugin {
 	private boolean launch(JSONArray args) throws JSONException {
 		final JSONObject options = args.getJSONObject(0);
 		
-		// Bundle extras = null;
-		// if (options.has("extras")) {
-		// 	extras = createExtras(options.getJSONArray("extras"));
-		// } else {
-		// 	extras = new Bundle();
-		// }
-		// int flags = 0;
-		// if (options.has("flags")) {
-		// 	flags = options.getInt("flags");
-		// }
-
-		// if (options.has("uri") && (options.has("packageName") || options.has("dataType"))) {
-		// 	String dataType = null;
-		// 	String packageName = null;
-		// 	if (options.has("packageName")) {
-		// 		packageName = options.getString("packageName");
-		// 	}
-		// 	if (options.has("dataType")) {
-		// 		dataType = options.getString("dataType");
-		// 	}
-		// 	launchAppWithData(packageName, options.getString("uri"), dataType, extras);
-		// 	return true;
-		// } else if (options.has("packageName")) {
-		// 	launchApp(options.getString("packageName"), extras);
-		// 	return true;
-		// } else if (options.has("uri")) {
-		// 	launchIntent(options.getString("uri"), extras, flags);
-		// 	return true;
-		// } else if (options.has("actionName")) {
-		// 	launchAction(options.getString("actionName"), extras);
-		// 	return true;
-		// }
-		// return false;
-		// String string = options.getString("packageName");
-        // String[] parts = string.split("-");
-        // String part1 = parts[0]; 
-        // String part2 = parts[1]; 
-	
+		
 		final CordovaInterface mycordova = cordova;
 		final CordovaPlugin plugin = this;
 	    final String packageName = options.getString("packageName");
 	    final String data = options.getString("data");
+		final String activityName = options.getString("activityName");
 		Log.i(TAG, "Trying to launch app: " + "com.virgo.sop");
 		cordova.getThreadPool().execute(new LauncherRunnable(this.callback) {
 			public void run() {
-				// final PackageManager pm = plugin.webView.getContext().getPackageManager();
-				// final Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
-				
                 final Intent intent = new Intent();
-                intent.setComponent(new ComponentName(packageName,"com.virgo.sop.Sop"));
-                intent.putExtra("data",data);
-				mycordova.startActivityForResult(plugin, intent, LAUNCH_REQUEST);
-                //mycordova.startActivity(intent);
+                intent.setComponent(new ComponentName(packageName,activityName));
+              
 					try {
-						// launchIntent.putExtra("data",data);
-						// mycordova.startActivityForResult(plugin, launchIntent, LAUNCH_REQUEST);
+						intent.putExtra("data",data);
+			           	mycordova.startActivityForResult(plugin, intent, LAUNCH_REQUEST);
 						((Launcher) plugin).callbackLaunched();
 					
 					} catch (ActivityNotFoundException e) {
